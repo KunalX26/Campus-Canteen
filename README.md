@@ -1,4 +1,5 @@
 🍔 Canteen Automation System
+
 A web-based Food Ordering and Canteen Management System built using Python (Flask) and MySQL. This application streamlines the process of ordering food in a canteen environment, allowing students to order from a digital menu and administrators to manage orders, inventory, and users efficiently.
 
 🚀 Features
