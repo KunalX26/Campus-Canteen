@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bunk & Bite | Admin Desk</title>
+    <link rel="icon" type="image/x-icon" href="static/photos/favicon.ico">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Inter:wght@400;700&family=Permanent+Marker&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                fontFamily: {
+                    sans: ['Inter', 'sans-serif'],
+                    varsity: ['Alfa Slab One', 'cursive'],
+                    doodle: ['Permanent Marker', 'cursive'],
+                },
+                colors: {
+                    'varsity-red': '#c92a2a',
+                    'varsity-yellow': '#fab005',
+                    'varsity-blue': '#1864ab',
+                    'paper-cream': '#f4f1e8',
+                    'ink-black': '#212529',
+                    'stamp-green': '#2b8a3e',
+                },
+                backgroundImage: {
+                    'paper-texture': "url('https://www.transparenttextures.com/patterns/crumpled-paper.png')",
+                },
+                boxShadow: {
+                    'sticker': '4px 4px 0px 0px #212529',
+                    'polaroid': '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 0 0 2px #212529',
+                }
+            }
+        }
+    }
+  </script>
+
+  <style>
+    body {
+        background-color: #f4f1e8;
+        background-image: url('https://www.transparenttextures.com/patterns/crumpled-paper.png');
+        color: #212529;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar { width: 10px; }
+    ::-webkit-scrollbar-track { background: #f4f1e8; border-left: 2px solid #212529; }
+    ::-webkit-scrollbar-thumb { background: #212529; border: 2px solid #f4f1e8; }
+    ::-webkit-scrollbar-thumb:hover { background: #c92a2a; }
+
+    /* Sidebar Active */
+    .sidebar-active {
+        background-color: #fab005 !important;
+        color: #212529 !important;
+        border: 2px solid #212529;
+        box-shadow: 4px 4px 0px 0px #212529;
+        transform: translate(-2px, -2px);
+    }
+
+    /* Animation */
+    @keyframes sticker-pop {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-up {
+        animation: sticker-pop 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    /* Lined Paper Effect for Rows */
+    .lined-row {
+        border-bottom: 2px dashed #ccc;
+    }
+    .lined-row:last-child {
+        border-bottom: none;
+    }
+  </style>
+</head>
+
+<body class="flex min-h-screen relative font-sans">
+
+  <aside class="w-20 lg:w-64 bg-varsity-blue border-r-4 border-ink-black flex flex-col fixed h-full z-50 overflow-y-auto transition-all duration-300">
+    <div class="p-6 flex items-center gap-3 shrink-0 h-24 border-b-4 border-ink-black bg-varsity-blue text-white">
+<div class="w-12 h-12 bg-varsity-yellow rounded-full border-4 border-ink-black flex items-center justify-center text-ink-black font-varsity text-2xl group-hover:rotate-12 transition-transform">
+ B&B
+</div>      <span class="hidden lg:block font-varsity text-2xl tracking-wide uppercase" style="text-shadow: 2px 2px 0 #000;">Bunk & Bite</span>
+    </div>
+
+    <nav class="flex-grow mt-6 px-4 pb-20 space-y-6">
+
+      <div>
+        <p class="hidden lg:block text-xs font-doodle text-white/80 uppercase px-2 mb-2 tracking-widest rotate-1">-- Ops --</p>
+        <a href="show_orders" class="sidebar-active flex items-center gap-3 p-3 rounded-lg text-ink-black transition group font-varsity uppercase tracking-wide">
+          <i class="fas fa-th-large w-6"></i>
+          <span class="hidden lg:block text-sm">The Board</span>
+        </a>
+        <a href="add_items" class="flex items-center gap-3 p-3 rounded-lg text-white hover:text-varsity-yellow hover:translate-x-1 transition group font-varsity uppercase tracking-wide">
+          <i class="fas fa-plus-circle w-6"></i>
+          <span class="hidden lg:block text-sm">Add Food</span>
+        </a>
+        <a href="show_items" class="flex items-center gap-3 p-3 rounded-lg text-white hover:text-varsity-yellow hover:translate-x-1 transition group font-varsity uppercase tracking-wide">
+          <i class="fas fa-utensils w-6"></i>
+          <span class="hidden lg:block text-sm">Menu List</span>
+        </a>
+      </div>
+
+      <div>
+        <p class="hidden lg:block text-xs font-doodle text-white/80 uppercase px-2 mb-2 tracking-widest rotate-1">-- People --</p>
+        <a href="admin_reg" class="flex items-center gap-3 p-3 rounded-lg text-white hover:text-varsity-yellow hover:translate-x-1 transition group font-varsity uppercase tracking-wide">
+          <i class="fas fa-user-shield w-6"></i>
+          <span class="hidden lg:block text-sm">New Admin</span>
+        </a>
+        <a href="student_reg_admin" class="flex items-center gap-3 p-3 rounded-lg text-white hover:text-varsity-yellow hover:translate-x-1 transition group font-varsity uppercase tracking-wide">
+          <i class="fas fa-user-plus w-6"></i>
+          <span class="hidden lg:block text-sm">New Student</span>
+        </a>
+        <a href="show_students" class="flex items-center gap-3 p-3 rounded-lg text-white hover:text-varsity-yellow hover:translate-x-1 transition group font-varsity uppercase tracking-wide">
+          <i class="fas fa-users w-6"></i>
+          <span class="hidden lg:block text-sm">Student List</span>
+        </a>
+      </div>
+
+      <div class="pt-4 border-t-2 border-dashed border-white/20">
+        <a href="admin_profile" class="flex items-center gap-3 p-3 rounded-lg text-white hover:text-varsity-yellow hover:translate-x-1 transition group font-varsity uppercase tracking-wide">
+          <i class="fas fa-id-card w-6"></i>
+          <span class="hidden lg:block text-sm">My Badge</span>
+        </a>
+        <a href="change_password" class="flex items-center gap-3 p-3 rounded-lg text-white hover:text-varsity-yellow hover:translate-x-1 transition group font-varsity uppercase tracking-wide">
+          <i class="fas fa-key w-6"></i>
+          <span class="hidden lg:block text-sm">Secrets</span>
+        </a>
+        <a href="logout" class="flex items-center gap-3 p-3 rounded-lg text-red-200 hover:text-white hover:bg-varsity-red border-2 border-transparent hover:border-ink-black transition group mt-2 font-bold font-sans">
+          <i class="fas fa-sign-out-alt w-6"></i>
+          <span class="hidden lg:block text-sm">Log Out</span>
+        </a>
+      </div>
+
+    </nav>
+  </aside>
+
+  <main class="ml-20 lg:ml-64 flex-grow relative">
+
+    <header class="h-20 bg-paper-cream/90 backdrop-blur-sm border-b-4 border-ink-black flex items-center justify-between px-8 sticky top-0 z-40 shadow-sm">
+      <div class="flex items-center gap-2 text-sm">
+        <i class="fas fa-layer-group text-varsity-red text-xl"></i>
+        <span class="text-ink-black font-doodle text-xl font-bold">The Boss's Desk</span>
+      </div>
+
+      <div class="flex items-center gap-6">
+        <div class="hidden md:flex items-center gap-2 px-3 py-1 bg-white border-2 border-ink-black transform -rotate-1 shadow-sm">
+          <span class="relative flex h-3 w-3">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-3 w-3 bg-stamp-green border border-black"></span>
+          </span>
+          <span class="text-xs font-bold text-ink-black uppercase tracking-wider font-varsity">Kitchen Open</span>
+        </div>
+
+        <div class="flex items-center gap-3 text-right">
+          <div class="hidden md:block leading-tight">
+            <div class="text-lg font-varsity text-ink-black">Admin</div>
+            <div class="text-xs text-varsity-blue font-doodle">Head Chef</div>
+          </div>
+          <div class="w-10 h-10 rounded-full bg-varsity-yellow border-2 border-ink-black flex items-center justify-center text-ink-black shadow-[2px_2px_0px_0px_#000]">
+            <i class="fas fa-user-shield"></i>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="p-6 md:p-10 max-w-7xl mx-auto min-h-[85vh]">
+
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 animate-up">
+        <div>
+          <h2 class="text-4xl font-bold font-varsity text-ink-black tracking-wide uppercase border-b-4 border-varsity-yellow inline-block">Incoming <span class="text-varsity-red">Orders</span></h2>
+          <p class="text-gray-600 mt-2 text-lg font-doodle transform -rotate-1">"Feed the hungry masses."</p>
+        </div>
+        <div class="flex flex-wrap gap-3">
+           <form action="{{ url_for('accepted_orders') }}" method="get">
+            <button class="bg-white border-2 border-ink-black px-4 py-2 rounded-none text-xs font-bold uppercase tracking-wider text-ink-black hover:bg-varsity-blue hover:text-white transition font-varsity shadow-sm transform rotate-1">
+                View Accepted
+            </button>
+           </form>
+           <form action="{{ url_for('rejected_orders') }}" method="get">
+             <button class="bg-white border-2 border-ink-black px-4 py-2 rounded-none text-xs font-bold uppercase tracking-wider text-ink-black hover:bg-varsity-red hover:text-white transition font-varsity shadow-sm transform -rotate-1">
+                 View Rejected
+             </button>
+           </form>
+          <button onclick="location.reload()" class="bg-varsity-yellow hover:bg-yellow-400 px-6 py-2 border-2 border-ink-black rounded-none text-sm font-bold uppercase tracking-wider text-ink-black shadow-sticker hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all flex items-center gap-2 font-varsity">
+             <i class="fas fa-sync-alt"></i> Refresh Board
+          </button>
+        </div>
+      </div>
+
+      {% if grouped_orders %}
+        {% for st_id in grouped_orders.keys()|sort %}
+
+        <div id="st-{{ st_id }}" class="bg-white border-4 border-ink-black shadow-sticker mb-10 animate-up relative transform transition hover:rotate-1">
+
+          <div class="bg-varsity-yellow px-6 py-4 border-b-4 border-ink-black flex justify-between items-center gap-4 relative">
+
+            <div class="flex items-center gap-5 relative z-10">
+              <div class="w-12 h-12 rounded-full bg-white border-2 border-ink-black flex items-center justify-center text-ink-black shadow-sm">
+                <i class="fas fa-receipt text-xl"></i>
+              </div>
+
+              <div>
+                 <span class="block text-xs text-ink-black uppercase font-bold tracking-widest font-varsity mb-0.5">Student ID</span>
+                 <span class="text-2xl font-bold text-ink-black font-doodle tracking-wide">#{{ st_id }}</span>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-2 bg-white px-4 py-2 border-2 border-ink-black shadow-[2px_2px_0px_0px_#000] transform -rotate-2">
+               <i class="fas fa-layer-group text-varsity-blue"></i>
+               <span class="text-lg font-bold text-ink-black font-varsity">{{ grouped_orders[st_id]|length }}</span>
+               <span class="text-xs text-gray-500 uppercase tracking-wide font-bold">Items</span>
+            </div>
+          </div>
+
+          <div class="flex flex-col bg-white p-2">
+
+            <div class="hidden md:grid grid-cols-12 px-6 py-2 bg-gray-100 border-y-2 border-ink-black text-xs uppercase font-bold text-ink-black tracking-widest font-varsity mb-2">
+                <div class="col-span-1">#ID</div>
+                <div class="col-span-5 pl-2">The Grub</div>
+                <div class="col-span-2 text-center">Qty</div>
+                <div class="col-span-2 text-right">Price</div>
+                <div class="col-span-2 text-center">Decision</div>
+            </div>
+
+            {% for order in grouped_orders[st_id] %}
+            <div class="lined-row group relative grid grid-cols-2 md:grid-cols-12 gap-4 md:gap-0 px-6 py-4 items-center hover:bg-paper-cream transition-colors">
+
+              <div class="col-span-2 md:col-span-6 grid grid-cols-6 gap-4 w-full">
+                  <div class="col-span-1 flex items-center">
+                      <span class="md:hidden text-xs font-bold text-gray-600 uppercase mr-2">ID:</span>
+                      <span class="font-mono text-sm font-bold text-gray-400 group-hover:text-ink-black transition-colors">#{{ order[0] }}</span>
+                  </div>
+
+                  <div class="col-span-5 flex items-start gap-3 pl-2">
+                      <div>
+                        <div class="flex items-center gap-2 mb-0.5">
+                            <span class="font-bold text-ink-black text-lg font-varsity leading-tight uppercase">{{ order[1] }}</span>
+                            {% if order[4] %}
+                            <span class="text-[9px] px-1.5 py-0.5 bg-varsity-blue text-white border border-ink-black uppercase tracking-wide shrink-0 font-bold transform rotate-3">{{ order[4] }}</span>
+                            {% endif %}
+                        </div>
+                        <div class="text-xs text-gray-500 font-doodle flex items-center gap-2">
+                            <span><i class="far fa-clock"></i>
+                              {% if order[7].strftime is defined %}
+                                {{ order[7].strftime("%H:%M") }}
+                              {% else %}
+                                {{ order[7] }}
+                              {% endif %}
+                            </span>
+                        </div>
+                      </div>
+                  </div>
+              </div>
+
+              <div class="col-span-2 md:col-span-6 grid grid-cols-3 md:grid-cols-6 gap-4 md:gap-0 items-center">
+
+                  <div class="col-span-1 md:col-span-2 flex flex-col items-center justify-center">
+                    <span class="md:hidden text-xs font-bold text-gray-600 uppercase mb-1">Qty</span>
+                    <div class="flex items-center justify-center w-8 h-8 rounded-full border-2 border-ink-black text-ink-black font-doodle text-lg font-bold bg-white">
+                        {{ order[2] }}
+                    </div>
+                  </div>
+
+                  <div class="col-span-1 md:col-span-2 flex flex-col items-end justify-center">
+                    <span class="md:hidden text-xs font-bold text-gray-600 uppercase mb-1">Total</span>
+                    <span class="text-varsity-red font-doodle font-bold text-lg transform -rotate-2">₹{{ order[3] }}</span>
+                  </div>
+
+                  <div class="col-span-1 md:col-span-2 flex justify-center gap-3">
+                      <form action="{{ url_for('update_order_status_form') }}" method="post">
+                        <input type="hidden" name="order_id" value="{{ order[0] }}">
+                        <input type="hidden" name="status" value="accepted">
+                        <input type="hidden" name="anchor" value="st-{{ st_id }}">
+
+                        <button title="Accept" class="w-10 h-10 rounded-full bg-white border-2 border-ink-black hover:bg-stamp-green hover:text-white hover:scale-110 transition-all duration-200 flex items-center justify-center shadow-sm group-btn">
+                          <i class="fas fa-check text-lg"></i>
+                        </button>
+                      </form>
+
+                      <form action="{{ url_for('update_order_status_form') }}" method="post">
+                        <input type="hidden" name="order_id" value="{{ order[0] }}">
+                        <input type="hidden" name="status" value="rejected">
+                        <input type="hidden" name="anchor" value="st-{{ st_id }}">
+
+                        <button title="Reject" class="w-10 h-10 rounded-full bg-white border-2 border-ink-black hover:bg-varsity-red hover:text-white hover:scale-110 transition-all duration-200 flex items-center justify-center shadow-sm group-btn">
+                          <i class="fas fa-times text-lg"></i>
+                        </button>
+                      </form>
+                  </div>
+              </div>
+            </div>
+            {% endfor %}
+
+          </div>
+          <div class="bg-gray-50 px-6 py-2 border-t-2 border-ink-black flex justify-between items-center">
+               <div class="text-xs text-gray-500 font-varsity uppercase tracking-widest">Student Ref: {{ st_id }}</div>
+               <div class="text-xs text-gray-400 font-doodle">Bunk & Bite Admin</div>
+          </div>
+
+        </div>
+        {% endfor %}
+      {% else %}
+
+        <div class="min-h-[50vh] bg-white border-4 border-ink-black shadow-sticker p-8 relative flex flex-col items-center justify-center text-center transform rotate-1">
+           <div class="absolute -top-4 w-32 h-8 bg-white/40 border border-gray-400 -rotate-3"></div>
+
+           <div class="w-32 h-32 rounded-full border-4 border-ink-black flex items-center justify-center mb-6 bg-paper-cream animate-pulse">
+               <i class="fas fa-mug-hot text-5xl text-ink-black/80"></i>
+           </div>
+           <h3 class="text-3xl font-bold text-ink-black mb-2 font-varsity uppercase">All Quiet</h3>
+           <p class="font-doodle text-xl text-gray-500 mb-8 max-w-sm mx-auto transform -rotate-1">"No orders yet. Maybe they're actually studying?"</p>
+           <button onclick="location.reload()" class="px-8 py-3 bg-varsity-blue text-white border-4 border-ink-black shadow-[4px_4px_0px_0px_#212529] hover:shadow-none hover:translate-x-1 hover:translate-y-1 font-varsity uppercase tracking-widest transition-all duration-200">
+               Refresh Feed
+           </button>
+        </div>
+
+      {% endif %}
+
+    </div>
+  </main>
+</body>
+</html>

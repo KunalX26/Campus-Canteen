@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bunk & Bite | Success</title>
+    <link rel="icon" type="image/x-icon" href="static/photos/favicon.ico">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Inter:wght@400;700&family=Permanent+Marker&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                fontFamily: {
+                    sans: ['Inter', 'sans-serif'],
+                    varsity: ['Alfa Slab One', 'cursive'],
+                    doodle: ['Permanent Marker', 'cursive'],
+                },
+                colors: {
+                    'varsity-red': '#c92a2a',
+                    'varsity-yellow': '#fab005',
+                    'varsity-blue': '#1864ab',
+                    'paper-cream': '#f4f1e8',
+                    'ink-black': '#212529',
+                    'stamp-green': '#2b8a3e',
+                },
+                backgroundImage: {
+                    'paper-texture': "url('https://www.transparenttextures.com/patterns/crumpled-paper.png')",
+                },
+                boxShadow: {
+                    'sticker': '4px 4px 0px 0px #212529',
+                    'polaroid': '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 0 0 2px #212529',
+                }
+            }
+        }
+    }
+  </script>
+
+  <style>
+    body {
+        background-color: #f4f1e8;
+        background-image: url('https://www.transparenttextures.com/patterns/crumpled-paper.png');
+        color: #212529;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar { width: 10px; }
+    ::-webkit-scrollbar-track { background: #f4f1e8; border-left: 2px solid #212529; }
+    ::-webkit-scrollbar-thumb { background: #212529; border: 2px solid #f4f1e8; }
+    ::-webkit-scrollbar-thumb:hover { background: #c92a2a; }
+
+    /* Sidebar Active */
+    .sidebar-active {
+        background-color: #fab005 !important;
+        color: #212529 !important;
+        border: 2px solid #212529;
+        box-shadow: 4px 4px 0px 0px #212529;
+        transform: translate(-2px, -2px);
+    }
+
+    /* Animation */
+    @keyframes sticker-pop {
+        from { opacity: 0; transform: translateY(20px) rotate(-5deg); }
+        to { opacity: 1; transform: translateY(0) rotate(1deg); }
+    }
+    .animate-up {
+        animation: sticker-pop 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    /* Tape Visual */
+    .tape-top {
+        position: absolute;
+        top: -15px;
+        left: 50%;
+        transform: translateX(-50%) rotate(2deg);
+        width: 120px;
+        height: 35px;
+        background-color: rgba(255, 255, 255, 0.4);
+        border: 1px solid rgba(0,0,0,0.1);
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        z-index: 10;
+        backdrop-filter: blur(2px);
+    }
+  </style>
+</head>
+
+<body class="flex min-h-screen relative font-sans">
+
+  <aside class="w-20 lg:w-64 bg-varsity-blue border-r-4 border-ink-black flex flex-col fixed h-full z-50 overflow-y-auto transition-all duration-300">
+    <div class="p-6 flex items-center gap-3 shrink-0 h-24 border-b-4 border-ink-black bg-varsity-blue text-white">
+<div class="w-12 h-12 bg-varsity-yellow rounded-full border-4 border-ink-black flex items-center justify-center text-ink-black font-varsity text-2xl group-hover:rotate-12 transition-transform">
+ B&B
+</div>      <span class="hidden lg:block font-varsity text-2xl tracking-wide uppercase" style="text-shadow: 2px 2px 0 #000;">Bunk & Bite</span>
+    </div>
+
+    <nav class="flex-grow mt-6 px-4 pb-20 space-y-6">
+
+      <div>
+        <p class="hidden lg:block text-xs font-doodle text-white/80 uppercase px-2 mb-2 tracking-widest rotate-1">-- Ops --</p>
+        <a href="show_orders" class="flex items-center gap-3 p-3 rounded-lg text-white hover:text-varsity-yellow hover:translate-x-1 transition group font-varsity uppercase tracking-wide">
+          <i class="fas fa-th-large w-6"></i>
+          <span class="hidden lg:block text-sm">The Board</span>
+        </a>
+        <a href="add_items" class="flex items-center gap-3 p-3 rounded-lg text-white hover:text-varsity-yellow hover:translate-x-1 transition group font-varsity uppercase tracking-wide">
+          <i class="fas fa-plus-circle w-6"></i>
+          <span class="hidden lg:block text-sm">Add Food</span>
+        </a>
+        <a href="show_items" class="sidebar-active flex items-center gap-3 p-3 rounded-lg text-ink-black transition group font-varsity uppercase tracking-wide">
+          <i class="fas fa-utensils w-6"></i>
+          <span class="hidden lg:block text-sm">Menu List</span>
+        </a>
+      </div>
+
+      <div>
+        <p class="hidden lg:block text-xs font-doodle text-white/80 uppercase px-2 mb-2 tracking-widest rotate-1">-- People --</p>
+        <a href="admin_reg" class="flex items-center gap-3 p-3 rounded-lg text-white hover:text-varsity-yellow hover:translate-x-1 transition group font-varsity uppercase tracking-wide">
+          <i class="fas fa-user-shield w-6"></i>
+          <span class="hidden lg:block text-sm">New Admin</span>
+        </a>
+        <a href="student_reg_admin" class="flex items-center gap-3 p-3 rounded-lg text-white hover:text-varsity-yellow hover:translate-x-1 transition group font-varsity uppercase tracking-wide">
+          <i class="fas fa-user-plus w-6"></i>
+          <span class="hidden lg:block text-sm">New Student</span>
+        </a>
+        <a href="show_students" class="flex items-center gap-3 p-3 rounded-lg text-white hover:text-varsity-yellow hover:translate-x-1 transition group font-varsity uppercase tracking-wide">
+          <i class="fas fa-users w-6"></i>
+          <span class="hidden lg:block text-sm">Student List</span>
+        </a>
+      </div>
+
+      <div class="pt-4 border-t-2 border-dashed border-white/20">
+        <a href="admin_profile" class="flex items-center gap-3 p-3 rounded-lg text-white hover:text-varsity-yellow hover:translate-x-1 transition group font-varsity uppercase tracking-wide">
+          <i class="fas fa-id-card w-6"></i>
+          <span class="hidden lg:block text-sm">My Badge</span>
+        </a>
+        <a href="change_password" class="flex items-center gap-3 p-3 rounded-lg text-white hover:text-varsity-yellow hover:translate-x-1 transition group font-varsity uppercase tracking-wide">
+          <i class="fas fa-key w-6"></i>
+          <span class="hidden lg:block text-sm">Secrets</span>
+        </a>
+        <a href="logout" class="flex items-center gap-3 p-3 rounded-lg text-red-200 hover:text-white hover:bg-varsity-red border-2 border-transparent hover:border-ink-black transition group mt-2 font-bold font-sans">
+          <i class="fas fa-sign-out-alt w-6"></i>
+          <span class="hidden lg:block text-sm">Log Out</span>
+        </a>
+      </div>
+    </nav>
+  </aside>
+
+  <main class="ml-20 lg:ml-64 flex-grow relative">
+
+    <header class="h-20 bg-paper-cream/90 backdrop-blur-sm border-b-4 border-ink-black flex items-center justify-between px-8 sticky top-0 z-40 shadow-sm">
+      <div class="flex items-center gap-2 text-sm">
+        <i class="fas fa-check-circle text-stamp-green text-xl"></i>
+        <span class="text-ink-black font-varsity text-xl uppercase tracking-wide">Done Deal</span>
+      </div>
+
+      <div class="flex items-center gap-6">
+        <div class="hidden md:flex items-center gap-2 px-3 py-1 bg-white border-2 border-ink-black transform -rotate-1 shadow-sm">
+          <span class="relative flex h-3 w-3">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-3 w-3 bg-stamp-green border border-black"></span>
+          </span>
+          <span class="text-xs font-bold text-ink-black uppercase tracking-wider font-varsity">System Online</span>
+        </div>
+
+        <div class="flex items-center gap-3 text-right">
+          <div class="hidden md:block leading-tight">
+            <div class="text-lg font-varsity text-ink-black">Admin</div>
+            <div class="text-xs text-varsity-blue font-doodle">Head Chef</div>
+          </div>
+          <div class="w-10 h-10 rounded-full bg-varsity-yellow border-2 border-ink-black flex items-center justify-center text-ink-black shadow-[2px_2px_0px_0px_#000]">
+            <i class="fas fa-user-shield"></i>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="p-6 md:p-10 flex items-center justify-center min-h-[80vh]">
+
+        <div class="w-full max-w-md relative animate-up">
+
+            <div class="bg-white p-10 rounded-sm border-4 border-ink-black shadow-sticker relative z-10 text-center transform rotate-1">
+                <div class="tape-top"></div>
+
+                <div class="w-24 h-24 mx-auto bg-green-50 rounded-full flex items-center justify-center border-4 border-stamp-green mb-6 shadow-sm">
+                    <i class="fas fa-check text-5xl text-stamp-green transform -rotate-12"></i>
+                </div>
+
+                {% if msg %}
+                <h2 class="text-3xl font-bold font-varsity text-ink-black mb-4 uppercase leading-none">Task<br><span class="text-stamp-green">Complete</span></h2>
+                <div class="bg-paper-cream border-2 border-ink-black p-4 mb-8 transform -rotate-1 shadow-sm">
+                    <p class="text-ink-black font-doodle text-lg">
+                        "{{ msg }}"
+                    </p>
+                </div>
+                {% else %}
+                <h2 class="text-3xl font-bold font-varsity text-ink-black mb-2 uppercase">Sorted!</h2>
+                <p class="text-gray-500 font-doodle text-lg mb-8">
+                   "Action completed. No explosions reported."
+                </p>
+                {% endif %}
+
+                <form action="{{ url_for('show_items') }}">
+                    <button type="submit"
+                        class="w-full py-4 bg-varsity-yellow text-ink-black font-bold font-varsity uppercase tracking-widest border-4 border-ink-black shadow-[4px_4px_0px_0px_#212529] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all flex items-center justify-center gap-2 group text-lg">
+                        <span>Return to Menu</span>
+                        <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                    </button>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+  </main>
+</body>
+</html>

@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bunk & Bite | Admin Profile</title>
+    <link rel="icon" type="image/x-icon" href="static/photos/favicon.ico">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Inter:wght@400;700&family=Permanent+Marker&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                fontFamily: {
+                    sans: ['Inter', 'sans-serif'],
+                    varsity: ['Alfa Slab One', 'cursive'],
+                    doodle: ['Permanent Marker', 'cursive'],
+                },
+                colors: {
+                    'varsity-red': '#c92a2a',
+                    'varsity-yellow': '#fab005',
+                    'varsity-blue': '#1864ab',
+                    'paper-cream': '#f4f1e8',
+                    'ink-black': '#212529',
+                    'stamp-green': '#2b8a3e',
+                },
+                backgroundImage: {
+                    'paper-texture': "url('https://www.transparenttextures.com/patterns/crumpled-paper.png')",
+                },
+                boxShadow: {
+                    'sticker': '4px 4px 0px 0px #212529',
+                    'polaroid': '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 0 0 2px #212529',
+                }
+            }
+        }
+    }
+  </script>
+
+  <style>
+    body {
+        background-color: #f4f1e8;
+        background-image: url('https://www.transparenttextures.com/patterns/crumpled-paper.png');
+        color: #212529;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar { width: 10px; }
+    ::-webkit-scrollbar-track { background: #f4f1e8; border-left: 2px solid #212529; }
+    ::-webkit-scrollbar-thumb { background: #212529; border: 2px solid #f4f1e8; }
+    ::-webkit-scrollbar-thumb:hover { background: #c92a2a; }
+
+    /* Sidebar Active */
+    .sidebar-active {
+        background-color: #fab005 !important;
+        color: #212529 !important;
+        border: 2px solid #212529;
+        box-shadow: 4px 4px 0px 0px #212529;
+        transform: translate(-2px, -2px);
+    }
+
+    /* Animation */
+    @keyframes sticker-pop {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-up {
+        animation: sticker-pop 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    /* ID Badge Hole */
+    .badge-hole {
+        width: 60px;
+        height: 15px;
+        background-color: #f4f1e8;
+        border: 2px solid #212529;
+        border-radius: 10px;
+        margin: 0 auto 20px;
+        position: relative;
+    }
+
+    /* File Input */
+    .file-input::file-selector-button {
+        background-color: #212529;
+        color: #fff;
+        border: 2px solid #212529;
+        padding: 0.2rem 0.5rem;
+        margin-right: 0.5rem;
+        cursor: pointer;
+        transition: all 0.2s;
+        font-family: 'Alfa Slab One', cursive;
+        font-size: 0.6rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+    .file-input::file-selector-button:hover {
+        background-color: #fab005;
+        color: #212529;
+    }
+  </style>
+</head>
+
+<body class="flex min-h-screen relative font-sans">
+
+  <aside class="w-20 lg:w-64 bg-varsity-blue border-r-4 border-ink-black flex flex-col fixed h-full z-50 overflow-y-auto transition-all duration-300">
+    <div class="p-6 flex items-center gap-3 shrink-0 h-24 border-b-4 border-ink-black bg-varsity-blue text-white">
+<div class="w-12 h-12 bg-varsity-yellow rounded-full border-4 border-ink-black flex items-center justify-center text-ink-black font-varsity text-2xl group-hover:rotate-12 transition-transform">
+                        B&B</div>      <span class="hidden lg:block font-varsity text-2xl tracking-wide uppercase" style="text-shadow: 2px 2px 0 #000;">Bunk & Bite</span>
+    </div>
+
+    <nav class="flex-grow mt-6 px-4 pb-20 space-y-6">
+
+      <div>
+        <p class="hidden lg:block text-xs font-doodle text-white/80 uppercase px-2 mb-2 tracking-widest rotate-1">-- Ops --</p>
+        <a href="show_orders" class="flex items-center gap-3 p-3 rounded-lg text-white hover:text-varsity-yellow hover:translate-x-1 transition group font-varsity uppercase tracking-wide">
+          <i class="fas fa-th-large w-6"></i>
+          <span class="hidden lg:block text-sm">The Board</span>
+        </a>
+        <a href="add_items" class="flex items-center gap-3 p-3 rounded-lg text-white hover:text-varsity-yellow hover:translate-x-1 transition group font-varsity uppercase tracking-wide">
+          <i class="fas fa-plus-circle w-6"></i>
+          <span class="hidden lg:block text-sm">Add Food</span>
+        </a>
+        <a href="show_items" class="flex items-center gap-3 p-3 rounded-lg text-white hover:text-varsity-yellow hover:translate-x-1 transition group font-varsity uppercase tracking-wide">
+          <i class="fas fa-utensils w-6"></i>
+          <span class="hidden lg:block text-sm">Menu List</span>
+        </a>
+      </div>
+
+      <div>
+        <p class="hidden lg:block text-xs font-doodle text-white/80 uppercase px-2 mb-2 tracking-widest rotate-1">-- People --</p>
+        <a href="admin_reg" class="flex items-center gap-3 p-3 rounded-lg text-white hover:text-varsity-yellow hover:translate-x-1 transition group font-varsity uppercase tracking-wide">
+          <i class="fas fa-user-shield w-6"></i>
+          <span class="hidden lg:block text-sm">New Admin</span>
+        </a>
+        <a href="student_reg_admin" class="flex items-center gap-3 p-3 rounded-lg text-white hover:text-varsity-yellow hover:translate-x-1 transition group font-varsity uppercase tracking-wide">
+          <i class="fas fa-user-plus w-6"></i>
+          <span class="hidden lg:block text-sm">New Student</span>
+        </a>
+        <a href="show_students" class="flex items-center gap-3 p-3 rounded-lg text-white hover:text-varsity-yellow hover:translate-x-1 transition group font-varsity uppercase tracking-wide">
+          <i class="fas fa-users w-6"></i>
+          <span class="hidden lg:block text-sm">Student List</span>
+        </a>
+      </div>
+
+      <div class="pt-4 border-t-2 border-dashed border-white/20">
+        <a href="admin_profile" class="sidebar-active flex items-center gap-3 p-3 rounded-lg text-ink-black transition group font-varsity uppercase tracking-wide">
+          <i class="fas fa-id-card w-6"></i>
+          <span class="hidden lg:block text-sm">My Badge</span>
+        </a>
+        <a href="change_password" class="flex items-center gap-3 p-3 rounded-lg text-white hover:text-varsity-yellow hover:translate-x-1 transition group font-varsity uppercase tracking-wide">
+          <i class="fas fa-key w-6"></i>
+          <span class="hidden lg:block text-sm">Secrets</span>
+        </a>
+        <a href="logout" class="flex items-center gap-3 p-3 rounded-lg text-red-200 hover:text-white hover:bg-varsity-red border-2 border-transparent hover:border-ink-black transition group mt-2 font-bold font-sans">
+          <i class="fas fa-sign-out-alt w-6"></i>
+          <span class="hidden lg:block text-sm">Log Out</span>
+        </a>
+      </div>
+    </nav>
+  </aside>
+
+  <main class="ml-20 lg:ml-64 flex-grow relative">
+
+    <header class="h-20 bg-paper-cream/90 backdrop-blur-sm border-b-4 border-ink-black flex items-center justify-between px-8 sticky top-0 z-40 shadow-sm">
+      <div class="flex items-center gap-2 text-sm">
+        <i class="fas fa-user-circle text-varsity-red text-xl"></i>
+        <span class="text-ink-black font-varsity text-xl uppercase tracking-wide">Personnel File</span>
+      </div>
+
+      <div class="flex items-center gap-6">
+        <div class="hidden md:flex items-center gap-2 px-3 py-1 bg-white border-2 border-ink-black transform -rotate-1 shadow-sm">
+          <span class="relative flex h-3 w-3">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-3 w-3 bg-stamp-green border border-black"></span>
+          </span>
+          <span class="text-xs font-bold text-ink-black uppercase tracking-wider font-varsity">System Online</span>
+        </div>
+
+        <div class="flex items-center gap-3 text-right">
+          <div class="hidden md:block leading-tight">
+            <div class="text-lg font-varsity text-ink-black">Admin</div>
+            <div class="text-xs text-varsity-blue font-doodle">Head Chef</div>
+          </div>
+          <div class="w-10 h-10 rounded-full bg-varsity-yellow border-2 border-ink-black flex items-center justify-center text-ink-black shadow-[2px_2px_0px_0px_#000]">
+            <i class="fas fa-user-shield"></i>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="p-6 md:p-10 max-w-7xl mx-auto min-h-[85vh]">
+
+      <h2 class="text-4xl font-bold font-varsity text-ink-black tracking-wide mb-8 border-b-4 border-varsity-yellow inline-block uppercase">My <span class="text-varsity-blue">Profile</span></h2>
+
+      <div class="grid grid-cols-1 xl:grid-cols-3 gap-8">
+
+        <div class="xl:col-span-1">
+            <div class="bg-white p-6 border-4 border-ink-black shadow-sticker relative text-center transform -rotate-1">
+                <div class="badge-hole"></div>
+
+                <div class="relative mt-2">
+
+                    {% if photo == 'nophoto' or not photo %}
+                        <div class="w-32 h-32 mx-auto rounded-full border-4 border-ink-black bg-gray-100 flex items-center justify-center text-gray-400 shadow-sm mb-6 border-dashed">
+                            <i class="fas fa-user-shield text-4xl"></i>
+                        </div>
+
+                        <form action="upload_admin_photo" enctype="multipart/form-data" method="post" class="space-y-4">
+                            <div class="p-2 border-2 border-ink-black bg-paper-cream transform rotate-1">
+                                <label class="block mb-2 text-xs font-bold text-ink-black font-varsity uppercase tracking-widest">Update Badge Photo</label>
+                                <input type="file" name="F1" class="file-input block w-full text-xs text-gray-500"/>
+                            </div>
+                            <button type="submit" class="w-full py-2 bg-ink-black text-white text-xs font-bold uppercase tracking-widest border-2 border-transparent hover:bg-varsity-blue hover:border-ink-black transition shadow-sm font-varsity">
+                                <i class="fas fa-upload mr-2"></i> Upload
+                            </button>
+                        </form>
+
+                    {% else %}
+                        <div class="relative group mx-auto w-32 h-32 mb-4">
+                             <img src="../static/photos/{{ photo }}" class="w-full h-full rounded-full border-4 border-ink-black object-cover shadow-polaroid grayscale-[20%] group-hover:grayscale-0 transition duration-300"/>
+                             <form action="delete_admin_photo" method="get" class="absolute bottom-0 right-0">
+                                <button type="submit" class="w-8 h-8 bg-varsity-red rounded-full text-white flex items-center justify-center hover:bg-red-600 transition shadow-sm border-2 border-ink-black" title="Remove Photo">
+                                    <i class="fas fa-trash-alt text-xs"></i>
+                                </button>
+                             </form>
+                        </div>
+                        <h3 class="text-xl font-bold font-varsity text-ink-black uppercase">Administrator</h3>
+                        <p class="text-varsity-blue text-sm uppercase tracking-widest font-bold font-doodle">Level 5 Access</p>
+                    {% endif %}
+
+                </div>
+            </div>
+
+            <div class="mt-8 p-6 border-4 border-varsity-red bg-red-50 relative">
+                <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-varsity-red text-white px-3 py-1 text-xs font-bold font-varsity uppercase tracking-widest">
+                    <i class="fas fa-exclamation-triangle mr-1"></i> Warning
+                </div>
+                <p class="text-ink-black text-xs mb-4 font-bold font-sans">Self-destruct sequence. This cannot be undone.</p>
+                {% if data %}
+                <form method="post" action="delete_admin" onsubmit="return confirm('WARNING: Are you sure you want to delete your admin account? This action cannot be undone.')">
+                    <input type="hidden" name="H1" value="{{ data[3] }}"/>
+                    <button type="submit" class="w-full py-2 bg-white border-2 border-varsity-red text-varsity-red hover:bg-varsity-red hover:text-white text-xs font-bold uppercase tracking-wider transition shadow-sm font-varsity">
+                        Delete Account
+                    </button>
+                </form>
+                {% endif %}
+            </div>
+        </div>
+
+
+        <div class="xl:col-span-2">
+            <div class="bg-white p-8 border-4 border-ink-black shadow-sticker relative z-10 animate-up">
+
+                <div class="absolute -top-3 right-8 w-24 h-6 bg-white/50 border border-gray-400 rotate-2"></div>
+
+                <div class="flex items-center justify-between mb-8 pb-4 border-b-2 border-dashed border-gray-300">
+                    <div>
+                         <h3 class="text-2xl font-bold text-ink-black font-varsity uppercase">Edit Details</h3>
+                         <p class="text-gray-500 text-sm mt-1 font-doodle">"Update your official record."</p>
+                    </div>
+                    <div class="w-10 h-10 rounded-full bg-varsity-yellow border-2 border-ink-black flex items-center justify-center text-ink-black shadow-sm">
+                         <i class="fas fa-pen"></i>
+                    </div>
+                </div>
+
+                {% if data %}
+                <form method="post" action="admin_profile1" class="space-y-6">
+
+                    <div>
+                        <label class="block mb-2 text-ink-black text-xs font-bold uppercase tracking-widest font-varsity">Full Name</label>
+                        <div class="relative">
+                            <span class="absolute left-4 top-3.5 text-gray-500"><i class="fas fa-user"></i></span>
+                            <input type="text" name="T1" id="T1" value="{{data[0]}}"
+                                class="w-full bg-white border-2 border-ink-black py-3 pl-10 pr-4 text-sm text-ink-black focus:outline-none focus:bg-paper-cream focus:border-varsity-blue shadow-sm font-sans">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block mb-2 text-ink-black text-xs font-bold uppercase tracking-widest font-varsity">Contact Number</label>
+                            <div class="relative">
+                                <span class="absolute left-4 top-3.5 text-gray-500"><i class="fas fa-phone"></i></span>
+                                <input type="text" name="T3" id="T3" value="{{data[2]}}"
+                                    class="w-full bg-white border-2 border-ink-black py-3 pl-10 pr-4 text-sm text-ink-black focus:outline-none focus:bg-paper-cream focus:border-varsity-blue shadow-sm font-sans">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block mb-2 text-ink-black text-xs font-bold uppercase tracking-widest font-varsity">Email (Official)</label>
+                            <div class="relative">
+                                <span class="absolute left-4 top-3.5 text-gray-500"><i class="fas fa-envelope"></i></span>
+                                <input type="text" value="{{data[3]}}" readonly
+                                    class="w-full bg-gray-100 border-2 border-gray-300 py-3 pl-10 pr-4 text-sm text-gray-500 cursor-not-allowed font-sans">
+                                <span class="absolute right-4 top-3.5 text-gray-400" title="Locked"><i class="fas fa-lock"></i></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block mb-2 text-ink-black text-xs font-bold uppercase tracking-widest font-varsity">Address</label>
+                        <div class="relative">
+                            <span class="absolute left-4 top-3.5 text-gray-500"><i class="fas fa-map-marker-alt"></i></span>
+                            <input type="text" name="T2" id="T2" value="{{data[1]}}"
+                                class="w-full bg-white border-2 border-ink-black py-3 pl-10 pr-4 text-sm text-ink-black focus:outline-none focus:bg-paper-cream focus:border-varsity-blue shadow-sm font-sans">
+                        </div>
+                    </div>
+
+                    <div class="pt-6 flex gap-4">
+                        <button type="submit"
+                            class="flex-1 py-4 bg-varsity-blue hover:bg-ink-black text-white font-bold font-varsity uppercase tracking-wider border-4 border-ink-black shadow-[4px_4px_0px_0px_#212529] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all duration-200 flex items-center justify-center gap-2">
+                            <i class="fas fa-save"></i> Save Updates
+                        </button>
+
+                        <a href="show_orders" class="px-6 py-4 border-4 border-ink-black bg-white hover:bg-gray-100 text-ink-black transition font-bold font-varsity text-xs uppercase tracking-widest flex items-center justify-center shadow-sm">
+                            Cancel
+                        </a>
+                    </div>
+                </form>
+                {% endif %}
+
+                {% if msg %}
+                <div class="mt-6 p-4 border-2 border-stamp-green bg-green-50 text-center transform -rotate-1 shadow-sm">
+                    <span class="text-stamp-green font-bold text-sm uppercase tracking-wide flex items-center justify-center gap-2 font-varsity"><i class="fas fa-check-circle text-lg"></i> {{msg}}</span>
+                </div>
+                {% endif %}
+
+            </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+</body>
+</html>

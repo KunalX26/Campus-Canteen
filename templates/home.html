@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bunk & Bite | Campus Cravings</title>
+
+    <link rel="icon" type="image/x-icon" href="static/photos/favicon.ico">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Inter:wght@400;700&family=Permanent+Marker&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        varsity: ['Alfa Slab One', 'cursive'],
+                        doodle: ['Permanent Marker', 'cursive'],
+                    },
+                    colors: {
+                        'varsity-red': '#c92a2a',
+                        'varsity-yellow': '#fab005',
+                        'varsity-blue': '#1864ab',
+                        'paper-cream': '#f4f1e8',
+                        'ink-black': '#212529',
+                    },
+                    backgroundImage: {
+                        'paper-texture': "url('https://www.transparenttextures.com/patterns/crumpled-paper.png')",
+                        'notebook-lines': "repeating-linear-gradient(transparent, transparent 31px, #e9ecef 31px, #e9ecef 32px)",
+                    },
+                    boxShadow: {
+                        'sticker': '4px 4px 0px 0px #212529',
+                        'polaroid': '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06), 0 0 0 10px #ffffff',
+                    },
+                    rotate: {
+                        'neg-2': '-2deg',
+                        '2': '2deg',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #f4f1e8;
+            background-image: url('https://www.transparenttextures.com/patterns/crumpled-paper.png');
+            color: #212529;
+            overflow-x: hidden;
+        }
+
+        .tape {
+            position: absolute;
+            width: 30px;
+            height: 12px;
+            background-color: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(0,0,0,0.1);
+            transform: rotate(-30deg);
+            top: -6px;
+            left: -10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            z-index: 30;
+        }
+
+        @media (min-width: 768px) {
+            .tape { width: 60px; height: 20px; top: -8px; left: -15px; }
+        }
+
+        .scribble-connector {
+            display: none;
+        }
+        @media (min-width: 768px) {
+            .scribble-connector {
+                display: block;
+                position: absolute;
+                top: 50%;
+                right: -40px;
+                width: 60px;
+                height: 20px;
+                background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 20' preserveAspectRatio='none'%3E%3Cpath d='M0,10 Q50,-10 100,10' fill='none' stroke='%23212529' stroke-width='3' stroke-dasharray='5,5' /%3E%3Cpath d='M90,0 L100,10 L90,20' fill='none' stroke='%23212529' stroke-width='3' /%3E%3C/svg%3E");
+                background-repeat: no-repeat;
+                transform: translateY(-50%);
+                z-index: 10;
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+
+    <nav class="fixed w-full z-50 top-0 py-2 md:py-4 px-4">
+        <div class="max-w-6xl mx-auto relative">
+            <div class="bg-varsity-blue text-white p-3 md:p-4 rounded-xl shadow-sticker border-4 border-ink-black flex justify-between items-center transform -rotate-1">
+                <a href="/" class="flex items-center gap-2 md:gap-3 group">
+                    <div class="w-10 h-10 md:w-12 md:h-12 bg-varsity-yellow rounded-full border-4 border-ink-black flex items-center justify-center text-ink-black font-varsity text-lg md:text-2xl group-hover:rotate-12 transition-transform">
+                        B&B
+                    </div>
+                    <span class="font-varsity text-sm md:text-2xl tracking-wider uppercase">Bunk & Bite</span>
+                </a>
+
+                <div class="hidden md:flex items-center gap-6 font-bold">
+                    <a href="menu_list" class="hover:text-varsity-yellow transition-colors font-doodle text-xl relative">
+                        The Menu
+                        <svg class="absolute -bottom-2 left-0 w-full" height="10" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M0 5 Q 25 0, 50 5 T 100 5" stroke="currentColor" stroke-width="3" fill="none"/></svg>
+                    </a>
+                    <a href="login" class="bg-varsity-red border-4 border-ink-black text-white px-6 py-2 rounded-lg font-varsity uppercase tracking-widest hover:-translate-y-1 hover:shadow-sticker transition-all">
+                        Student Login
+                    </a>
+                </div>
+
+                <button id="mobile-menu-btn" class="md:hidden text-white text-2xl p-2 focus:outline-none">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+
+            <div id="mobile-menu" class="hidden absolute top-full left-0 w-full pt-2 z-10">
+                <div class="bg-paper-cream border-4 border-ink-black shadow-sticker p-6 rounded-xl transform rotate-1">
+                    <div class="flex flex-col gap-6 text-center">
+                        <a href="menu_list" class="font-doodle text-2xl text-ink-black">The Menu</a>
+                        <hr class="border-ink-black border-dashed border-2">
+                        <a href="login" class="font-varsity text-xl text-white bg-varsity-red border-4 border-ink-black py-3 rounded-lg">
+                            Student Login
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-28 md:pt-36 pb-20 px-4 md:px-6">
+        <div class="max-w-6xl mx-auto">
+
+            <div class="flex flex-col md:flex-row items-center justify-between gap-10 md:gap-12 mb-16 md:mb-32">
+                <div class="w-full md:w-1/2 relative z-10 space-y-4 md:space-y-6 text-center md:text-left">
+                    <span class="inline-block bg-varsity-yellow border-4 border-ink-black px-3 py-1 font-bold uppercase text-xs md:text-base transform -rotate-2 shadow-sticker">
+                        Official Campus Supplier
+                    </span>
+                    <h1 class="font-varsity text-5xl md:text-8xl text-ink-black leading-[0.9] uppercase" style="-webkit-text-stroke: 1.5px black; color: white; text-shadow: 4px 4px 0px #c92a2a;">
+                        Eat. <br>Study. <br>Repeat.
+                    </h1>
+                    <p class="font-doodle text-xl md:text-2xl text-ink-black/80 transform rotate-1 max-w-sm mx-auto md:mx-0">
+                        "The official sponsor of your 3 AM breakdown."
+                    </p>
+                    <div class="pt-4 md:pt-6">
+                        <a href="menu_list" class="inline-block bg-varsity-blue text-white font-varsity text-xl md:text-2xl px-8 py-4 md:px-10 md:py-6 rounded-xl border-4 border-ink-black shadow-sticker hover:bg-varsity-red transition-all transform -rotate-1 active:scale-95">
+                            ORDER NOW <i class="fa-solid fa-burger ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="w-full md:w-1/2 relative h-[300px] md:h-[500px] mt-10 md:mt-0">
+                    <div class="absolute top-0 left-4 w-1/2 md:w-2/3 z-10 transform rotate-neg-2 p-2 md:p-3 bg-white shadow-polaroid">
+                        <div class="tape"></div>
+                        <img src="https://images.unsplash.com/photo-1532012197267-da84d127e765?auto=format&fit=crop&w=600&q=80" class="w-full h-auto border-2 border-ink-black grayscale" alt="Books">
+                        <p class="font-doodle text-center mt-1 md:mt-2 text-xs md:text-base">Midterms...</p>
+                    </div>
+                    <div class="absolute top-12 right-4 w-1/2 md:w-3/4 z-20 transform rotate-3 p-2 md:p-3 bg-white shadow-polaroid">
+                        <div class="tape" style="right: -10px; left: auto; transform: rotate(30deg);"></div>
+                        <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=600&q=80" class="w-full h-auto border-2 border-ink-black" alt="Pizza">
+                         <p class="font-doodle text-center mt-1 md:mt-2 text-varsity-red text-xs md:text-base">The Lifesaver!</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-20 relative">
+                <div class="text-center mb-8">
+                    <h2 class="font-varsity text-2xl md:text-4xl text-ink-black uppercase transform -rotate-1 inline-block border-b-4 border-varsity-yellow">
+                        The Game Plan
+                    </h2>
+                </div>
+                <div class="grid grid-cols-3 md:grid-cols-3 gap-2 md:gap-8 px-1 md:px-2">
+
+                    <div class="relative group">
+                        <div class="bg-white border-2 md:border-4 border-ink-black p-2 md:p-6 shadow-sticker transform rotate-1 h-full flex flex-col items-center text-center">
+                            <div class="w-8 h-8 md:w-16 md:h-16 bg-varsity-blue rounded-full border-2 md:border-4 border-ink-black flex items-center justify-center text-white text-sm md:text-3xl mb-2 md:mb-4">
+                                <i class="fa-solid fa-hand-holding-dollar"></i>
+                            </div>
+                            <h3 class="font-varsity text-[10px] md:text-xl mb-1 md:mb-2 uppercase leading-tight">1. Top Up</h3>
+                            <p class="font-doodle text-[8px] md:text-lg leading-tight text-gray-700">Cash or UPI at Canteen.</p>
+                        </div>
+                        <div class="scribble-connector"></div>
+                    </div>
+
+                    <div class="relative group">
+                        <div class="bg-white border-2 md:border-4 border-ink-black p-2 md:p-6 shadow-sticker transform -rotate-1 h-full flex flex-col items-center text-center">
+                            <div class="w-8 h-8 md:w-16 md:h-16 bg-varsity-yellow rounded-full border-2 md:border-4 border-ink-black flex items-center justify-center text-ink-black text-sm md:text-3xl mb-2 md:mb-4">
+                                <i class="fa-solid fa-wallet"></i>
+                            </div>
+                            <h3 class="font-varsity text-[10px] md:text-xl mb-1 md:mb-2 uppercase leading-tight">2. Credit</h3>
+                            <p class="font-doodle text-[8px] md:text-lg leading-tight text-gray-700">Wallet updates instantly.</p>
+                        </div>
+                        <div class="scribble-connector"></div>
+                    </div>
+
+                    <div class="relative group">
+                        <div class="bg-white border-2 md:border-4 border-ink-black p-2 md:p-6 shadow-sticker transform rotate-2 h-full flex flex-col items-center text-center">
+                            <div class="w-8 h-8 md:w-16 md:h-16 bg-varsity-red rounded-full border-2 md:border-4 border-ink-black flex items-center justify-center text-white text-sm md:text-3xl mb-2 md:mb-4">
+                                <i class="fa-solid fa-person-biking"></i>
+                            </div>
+                            <h3 class="font-varsity text-[10px] md:text-xl mb-1 md:mb-2 uppercase leading-tight">3. Feast</h3>
+                            <p class="font-doodle text-[8px] md:text-lg leading-tight text-gray-700">Hot food to your Hostel.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="relative mb-24">
+                <div class="bg-white border-4 border-ink-black shadow-sticker p-4 md:p-8 relative overflow-hidden bg-notebook-lines">
+                    <div class="absolute left-2 md:left-4 top-0 h-full hidden md:flex flex-col gap-8 pt-8">
+                        <div class="w-6 h-6 rounded-full bg-paper-cream border-2 border-ink-black shadow-inner"></div>
+                        <div class="w-6 h-6 rounded-full bg-paper-cream border-2 border-ink-black shadow-inner"></div>
+                        <div class="w-6 h-6 rounded-full bg-paper-cream border-2 border-ink-black shadow-inner"></div>
+                    </div>
+
+                    <div class="md:ml-12">
+                        <h2 class="font-varsity text-2xl md:text-4xl uppercase mb-1 text-varsity-blue text-center md:text-left">Today's Syllabus</h2>
+                        <p class="font-doodle text-base md:text-xl mb-8 text-ink-black/70 text-center md:text-left">Required eating for tonight.</p>
+
+                        <div class="grid grid-cols-3 sm:grid-cols-2 md:grid-cols-3 gap-2 md:gap-8">
+                            <div class="bg-white p-1.5 md:p-4 shadow-polaroid transform rotate-neg-2 hover:rotate-0 transition-all cursor-pointer">
+                                <div class="aspect-square overflow-hidden border-2 border-ink-black mb-2 md:mb-4">
+                                    <img src="static/item_photos/1765297376.jpg" class="w-full h-full object-cover" alt="Pizza">
+                                </div>
+                                <h3 class="font-varsity text-[10px] md:text-lg text-varsity-red leading-tight truncate">Veggie Volcano</h3>
+                                <div class="flex justify-between items-center mt-1 md:mt-2 font-bold">
+                                    <span class="font-doodle text-xs md:text-lg">₹140</span>
+                                    <i class="fa-solid fa-plus-circle text-sm md:text-2xl text-varsity-blue"></i>
+                                </div>
+                            </div>
+
+                            <div class="bg-white p-1.5 md:p-4 shadow-polaroid transform rotate-2 hover:rotate-0 transition-all cursor-pointer">
+                                <div class="aspect-square overflow-hidden border-2 border-ink-black mb-2 md:mb-4">
+                                    <img src="static/item_photos/1765296551.jpg" class="w-full h-full object-cover" alt="Maggi">
+                                </div>
+                                <h3 class="font-varsity text-[10px] md:text-lg text-varsity-red leading-tight truncate">Tadka Maggi</h3>
+                                <div class="flex justify-between items-center mt-1 md:mt-2 font-bold">
+                                    <span class="font-doodle text-xs md:text-lg">₹65</span>
+                                    <i class="fa-solid fa-plus-circle text-sm md:text-2xl text-varsity-blue"></i>
+                                </div>
+                            </div>
+
+                            <div class="bg-white p-1.5 md:p-4 shadow-polaroid transform rotate-neg-2 hover:rotate-0 transition-all cursor-pointer">
+                                <div class="aspect-square overflow-hidden border-2 border-ink-black mb-2 md:mb-4">
+                                    <img src="static/item_photos/1765299842.jpg" class="w-full h-full object-cover" alt="Hot Choc">
+                                </div>
+                                <h3 class="font-varsity text-[10px] md:text-lg text-varsity-red leading-tight truncate">Hot Choc</h3>
+                                <div class="flex justify-between items-center mt-1 md:mt-2 font-bold">
+                                    <span class="font-doodle text-xs md:text-lg">₹70</span>
+                                    <i class="fa-solid fa-plus-circle text-sm md:text-2xl text-varsity-blue"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="text-center mt-10">
+                            <a href="menu_list" class="inline-block font-doodle text-lg md:text-xl hover:text-varsity-yellow transition-colors ">
+                                See Full Textbook ->
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-ink-black text-white py-12 border-t-4 border-varsity-red">
+        <div class="max-w-6xl mx-auto px-6 text-center relative">
+            <h2 class="font-varsity text-2xl md:text-3xl text-varsity-yellow mb-4 uppercase">Bunk & Bite Class of '24</h2>
+            <p class="font-doodle text-lg opacity-80">Made for sleepless nights.</p>
+            <div class="mt-8 pt-8 border-t border-white/10">
+                <p class="font-doodle opacity-60 text-sm">Developed By</p>
+                <p class="font-varsity tracking-widest text-lg">Kunal Maheshwari</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const icon = menuBtn.querySelector('i');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-xmark');
+        });
+    </script>
+</body>
+</html>
